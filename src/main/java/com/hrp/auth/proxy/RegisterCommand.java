@@ -36,9 +36,10 @@ public class RegisterCommand implements SimpleCommand {
 
     @Override
     public void execute(Invocation invocation) {
-        CommandSource source = invocation.source();
-        String[] args = invocation.arguments();
+        execute(invocation.source(), invocation.arguments());
+    }
 
+    public void execute(CommandSource source, String[] args) {
         // Only players can execute this command
         if (!(source instanceof Player player)) {
             source.sendMessage(Component.text("This command can only be executed by a player."));

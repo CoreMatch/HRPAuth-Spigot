@@ -40,8 +40,7 @@ public class OAuthClient {
     private String fetchToken() throws Exception {
         String body = "grant_type=client_credentials"
                 + "&client_id=" + urlEncode(hrpAuth.getClientId())
-                + "&client_secret=" + urlEncode(hrpAuth.getClientSecret())
-                + "&scope=" + urlEncode("user.claim.as-service");
+                + "&client_secret=" + urlEncode(hrpAuth.getClientSecret());
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(hrpAuth.getUrl() + "/oauth/token"))

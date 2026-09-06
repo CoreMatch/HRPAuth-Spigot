@@ -55,7 +55,11 @@ public class HrpAuthProxy {
         SimpleCommand hrpauthCmd = invocation -> {
             String[] args = invocation.arguments();
             if (args.length > 0 && "reg".equalsIgnoreCase(args[0])) {
-                registerCommand.execute(invocation);
+                // Strip the "reg" subcommand word so RegisterCommand sees
+                // ["email", "password"] instead of ["reg", "email", "password"]
+                String[] stripped = new String[args.length - 1];
+                System.arraycopy(args, 1, stripped, 0, stripped.length);
+                registerCommand.execute(invocation.source(), stripped);
             } else {
                 invocation.source().sendMessage(
                         net.kyori.adventure.text.Component.text(
