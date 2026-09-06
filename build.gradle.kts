@@ -12,6 +12,7 @@ repositories {
 dependencies {
     compileOnly("com.velocitypowered:velocity-api:4.1.1-SNAPSHOT")
     annotationProcessor("com.velocitypowered:velocity-api:4.1.1-SNAPSHOT")
+    compileOnly("org.yaml:snakeyaml:2.2")
 }
 
 java {
