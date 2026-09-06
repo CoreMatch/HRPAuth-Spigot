@@ -18,7 +18,7 @@ import java.util.concurrent.CompletableFuture;
  *
  * Calls POST /admin/claim-user on the HRPAuth backend to claim the executing
  * player's proxy-registered account (cbh 0→1) with a real email + password.
- * The player's Mojang UUID is auto-detected from the proxy session.
+ * The player's username is auto-detected from the proxy session.
  */
 public class RegisterCommand implements SimpleCommand {
 
@@ -53,7 +53,7 @@ public class RegisterCommand implements SimpleCommand {
 
         String email = args[0];
         String password = args[1];
-        String mojangUuid = player.getUniqueId().toString().replace("-", "");
+        String username = player.getUsername();
 
         if (config.getHrpAuth().getClientId().isEmpty() || config.getHrpAuth().getClientSecret().isEmpty()) {
             source.sendMessage(Component.text("OAuth2 credentials not configured. Contact an administrator."));
@@ -67,8 +67,8 @@ public class RegisterCommand implements SimpleCommand {
             try {
                 String serviceToken = oauthClient.getServiceToken();
                 String json = """
-                        {"mojang_uuid":"%s","email":"%s","password":"%s"}""".formatted(
-                        escapeJson(mojangUuid), escapeJson(email), escapeJson(password));
+                        {"username":"%s","email":"%s","password":"%s"}""".formatted(
+                        escapeJson(username), escapeJson(email), escapeJson(password));
 
                 HttpRequest request = HttpRequest.newBuilder()
                         .uri(URI.create(config.getHrpAuth().getUrl() + "/admin/claim-user"))
@@ -84,13 +84,35 @@ public class RegisterCommand implements SimpleCommand {
                     player.sendMessage(Component.text("Account claimed successfully! You can now log in via WebUI."));
                 } else {
                     String body = response.body();
+                    String errorCode = extractError(body);
                     String errorMsg = extractMessage(body);
-                    player.sendMessage(Component.text("Claim failed (" + response.statusCode() + "): " + errorMsg));
+                    String friendly = switch (errorCode) {
+                        case "user_not_claimable" ->
+                            "This account is not claimable (already claimed or not a proxy-registered account).";
+                        case "username_already_bound" ->
+                            "This username is already bound to another account and cannot be claimed.";
+                        case "user_not_found" ->
+                            "No unclaimed account found for your username.";
+                        case "email_already_registered" ->
+                            "This email is already registered.";
+                        default -> "Claim failed (" + response.statusCode() + "): " + errorMsg;
+                    };
+                    player.sendMessage(Component.text(friendly));
                 }
             } catch (Exception e) {
                 player.sendMessage(Component.text("Claim request failed: " + e.getMessage()));
             }
         });
+    }
+
+    private static String extractError(String json) {
+        // Look for "error":"..." pattern (error code)
+        int idx = json.indexOf("\"error\":\"");
+        if (idx < 0) return "";
+        int start = idx + 9;
+        int end = json.indexOf("\"", start);
+        if (end < 0) return json.substring(start);
+        return json.substring(start, end);
     }
 
     private static String extractMessage(String json) {
