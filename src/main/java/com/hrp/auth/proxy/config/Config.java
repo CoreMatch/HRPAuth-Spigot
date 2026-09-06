@@ -36,14 +36,12 @@ public class Config {
         private String url = "http://127.0.0.1:2778";
         private String clientId = "";
         private String clientSecret = "";
-        private String serviceToken = "";
         private int timeoutSec = 10;
         private boolean verifyTls = true;
 
         public String getUrl() { return url; }
         public String getClientId() { return clientId; }
         public String getClientSecret() { return clientSecret; }
-        public String getServiceToken() { return serviceToken; }
         public int getTimeoutSec() { return timeoutSec; }
         public boolean isVerifyTls() { return verifyTls; }
     }
@@ -114,7 +112,6 @@ public class Config {
             cfg.hrpAuth.url = getString(hrp, "url", cfg.hrpAuth.url);
             cfg.hrpAuth.clientId = getString(hrp, "client-id", cfg.hrpAuth.clientId);
             cfg.hrpAuth.clientSecret = getString(hrp, "client-secret", cfg.hrpAuth.clientSecret);
-            cfg.hrpAuth.serviceToken = getString(hrp, "service-token", cfg.hrpAuth.serviceToken);
             cfg.hrpAuth.timeoutSec = getInt(hrp, "timeout-sec", cfg.hrpAuth.timeoutSec);
             cfg.hrpAuth.verifyTls = getBool(hrp, "verify-tls", cfg.hrpAuth.verifyTls);
         }
@@ -201,7 +198,6 @@ public class Config {
         hrpAuth.put("url", "http://127.0.0.1:2778");
         hrpAuth.put("client-id", "");
         hrpAuth.put("client-secret", "");
-        hrpAuth.put("service-token", "");
         hrpAuth.put("timeout-sec", 10);
         hrpAuth.put("verify-tls", true);
         root.put("hrpauth", hrpAuth);

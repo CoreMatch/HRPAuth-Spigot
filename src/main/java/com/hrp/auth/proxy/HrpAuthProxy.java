@@ -49,7 +49,8 @@ public class HrpAuthProxy {
 
         // Register commands
         CommandManager commandManager = server.getCommandManager();
-        RegisterCommand registerCommand = new RegisterCommand(config);
+        OAuthClient oauthClient = new OAuthClient(config.getHrpAuth());
+        RegisterCommand registerCommand = new RegisterCommand(config, oauthClient);
 
         SimpleCommand hrpauthCmd = invocation -> {
             String[] args = invocation.arguments();

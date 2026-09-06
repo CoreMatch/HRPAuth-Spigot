@@ -23,10 +23,12 @@ import java.util.concurrent.CompletableFuture;
 public class RegisterCommand implements SimpleCommand {
 
     private final Config config;
+    private final OAuthClient oauthClient;
     private final HttpClient httpClient;
 
-    public RegisterCommand(Config config) {
+    public RegisterCommand(Config config, OAuthClient oauthClient) {
         this.config = config;
+        this.oauthClient = oauthClient;
         this.httpClient = HttpClient.newBuilder()
                 .connectTimeout(Duration.ofSeconds(config.getHrpAuth().getTimeoutSec()))
                 .build();
@@ -52,9 +54,8 @@ public class RegisterCommand implements SimpleCommand {
         String password = args[1];
         String mojangUuid = player.getUniqueId().toString().replace("-", "");
 
-        String serviceToken = config.getHrpAuth().getServiceToken();
-        if (serviceToken.isEmpty()) {
-            source.sendMessage(Component.text("Service token is not configured. Contact an administrator."));
+        if (config.getHrpAuth().getClientId().isEmpty() || config.getHrpAuth().getClientSecret().isEmpty()) {
+            source.sendMessage(Component.text("OAuth2 credentials not configured. Contact an administrator."));
             return;
         }
 
@@ -63,6 +64,7 @@ public class RegisterCommand implements SimpleCommand {
         // Async HTTP request to avoid blocking the proxy
         CompletableFuture.runAsync(() -> {
             try {
+                String serviceToken = oauthClient.getServiceToken();
                 String json = """
                         {"mojang_uuid":"%s","email":"%s","password":"%s"}""".formatted(
                         escapeJson(mojangUuid), escapeJson(email), escapeJson(password));
