@@ -1,0 +1,9 @@
+{
+  "id": "hrpauth-proxy",
+  "name": "HRPAuth-Proxy",
+  "version": "${version}",
+  "description": "HRPAuth Velocity Proxy Plugin",
+  "authors": ["HRP"],
+  "main": "com.hrp.auth.proxy.HrpAuthProxy",
+  "dependencies": []
+}
