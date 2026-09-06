@@ -49,30 +49,28 @@ public class HrpAuthProxy {
 
         // Register commands
         CommandManager commandManager = server.getCommandManager();
+        RegisterCommand registerCommand = new RegisterCommand(config);
 
-        CommandMeta hrpauthMeta = commandManager.metaBuilder("hrpauth")
-                .plugin(this)
-                .build();
-        commandManager.register(hrpauthMeta, new SimpleCommand() {
-            @Override
-            public void execute(Invocation invocation) {
+        SimpleCommand hrpauthCmd = invocation -> {
+            String[] args = invocation.arguments();
+            if (args.length > 0 && "reg".equalsIgnoreCase(args[0])) {
+                registerCommand.execute(invocation);
+            } else {
                 invocation.source().sendMessage(
                         net.kyori.adventure.text.Component.text("HRPAuth-Proxy v" + config.getSite().getVersion())
                 );
             }
-        });
+        };
+
+        CommandMeta hrpauthMeta = commandManager.metaBuilder("hrpauth")
+                .plugin(this)
+                .build();
+        commandManager.register(hrpauthMeta, hrpauthCmd);
 
         CommandMeta haMeta = commandManager.metaBuilder("ha")
                 .plugin(this)
                 .build();
-        commandManager.register(haMeta, new SimpleCommand() {
-            @Override
-            public void execute(Invocation invocation) {
-                invocation.source().sendMessage(
-                        net.kyori.adventure.text.Component.text("HA > " + config.getSite().getName())
-                );
-            }
-        });
+        commandManager.register(haMeta, hrpauthCmd);
 
         logger.info("HRPAuth-Proxy has been loaded! (site={})", config.getSite().getName());
     }
