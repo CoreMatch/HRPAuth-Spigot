@@ -57,7 +57,11 @@ public class HrpAuthProxy {
                 registerCommand.execute(invocation);
             } else {
                 invocation.source().sendMessage(
-                        net.kyori.adventure.text.Component.text("HRPAuth-Proxy v" + config.getSite().getVersion())
+                        net.kyori.adventure.text.Component.text(
+                                "HA > " + config.getSite().getName() + " v" + config.getSite().getVersion() + "\n"
+                                + "Usage:\n"
+                                + "  /ha reg <email> <password> - Claim a proxy-registered account"
+                        )
                 );
             }
         };
