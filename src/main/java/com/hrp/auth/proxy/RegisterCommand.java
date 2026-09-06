@@ -54,6 +54,7 @@ public class RegisterCommand implements SimpleCommand {
         String email = args[0];
         String password = args[1];
         String mojangUuid = player.getUniqueId().toString().replace("-", "");
+        String playerName = player.getUsername();
 
         if (config.getHrpAuth().getClientId().isEmpty() || config.getHrpAuth().getClientSecret().isEmpty()) {
             source.sendMessage(Component.text("OAuth2 credentials not configured. Contact an administrator."));
@@ -67,8 +68,8 @@ public class RegisterCommand implements SimpleCommand {
             try {
                 String serviceToken = oauthClient.getServiceToken();
                 String json = """
-                        {"mojang_uuid":"%s","email":"%s","password":"%s"}""".formatted(
-                        escapeJson(mojangUuid), escapeJson(email), escapeJson(password));
+                        {"mojang_uuid":"%s","username":"%s","email":"%s","password":"%s"}""".formatted(
+                        escapeJson(mojangUuid), escapeJson(playerName), escapeJson(email), escapeJson(password));
 
                 HttpRequest request = HttpRequest.newBuilder()
                         .uri(URI.create(config.getHrpAuth().getUrl() + "/admin/claim-user"))
