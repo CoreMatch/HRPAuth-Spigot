@@ -73,7 +73,7 @@ Two changes landed after this entry was written:
    `POST {url}/yggdrasil-api/admin/claim-user`
    (`src/main/java/com/hrp/auth/proxy/RegisterCommand.java:75`) and
    `POST {url}/yggdrasil-api/admin/force-bind`
-   (`src/main/java/com/hrp/auth/proxy/ForceBindCommand.java:79`). The HRPAuth
+   (`src/main/java/com/hrp/auth/proxy/ForceBindCommand.java:73`). The HRPAuth
    core relay matches the `/yggdrasil-api` prefix, strips it, and forwards
    the request to HRPAuth-Yggdrasil-API.
 
