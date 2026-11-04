@@ -34,5 +34,7 @@ account).
 ## Documentation
 
 - HRPAuth contracts and error codes: [HA-Contract](https://github.com/CoreMatch/HA-Contract)
-  (see `docs/api/openapi/hrpauth-business.yaml`)
+  (see `docs/api/openapi/hrpauth-business.yaml` and
+  `docs/api/openapi/hrpauth-yggdrasil-business.yaml` — the latter specifies
+  the `/admin/claim-user` and `/admin/force-bind` endpoints this plugin calls)
 - Force-bind background (roadmap item 2.1): [HA-Contract — agents.md](https://github.com/CoreMatch/HA-Contract/blob/main/agents.md)

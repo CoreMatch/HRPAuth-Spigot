@@ -35,5 +35,5 @@ Each entry is one page in ADR style:
 | # | Title | Status | Date |
 |---|-------|--------|------|
 | [0001](0001-velocity-proxy-plugin-despite-repo-name.md) | Velocity Proxy Plugin Despite the Repository Name | accepted | 2026-11-04 |
-| [0002](0002-admin-endpoints-called-but-not-implemented.md) | `/admin/*` Endpoints Called but Not Implemented in the Backend | accepted | 2026-11-04 |
+| [0002](0002-admin-endpoints-called-but-not-implemented.md) | `/admin/*` Endpoints Called but Not Implemented in the Backend | accepted (historical; backend gap closed 2026-11-05, see entry update) | 2026-11-04 |
 | [0003](0003-service-auth-via-oauth2-client-credentials.md) | Service Auth via OAuth2 client_credentials (Super Client) | accepted | 2026-11-04 |
