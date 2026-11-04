@@ -16,10 +16,10 @@ import java.util.concurrent.CompletableFuture;
 /**
  * /ha forcebind &lt;email&gt; &lt;password&gt;
  *
- * Calls POST /admin/force-bind on the HRPAuth backend to transfer the
- * executing player's Mojang UUID from their proxy-registered account (cbh=0)
- * to a manually registered account identified by email + password, then
- * deletes the proxy-registered account.
+ * Calls POST /yggdrasil-api/admin/force-bind (relayed by the HRPAuth core to
+ * HRPAuth-Yggdrasil-API) to transfer the executing player's Mojang UUID from
+ * their proxy-registered account (cbh=0) to a manually registered account
+ * identified by email + password, then deletes the proxy-registered account.
  */
 public class ForceBindCommand implements SimpleCommand {
 
@@ -76,7 +76,7 @@ public class ForceBindCommand implements SimpleCommand {
                         escapeJson(username), escapeJson(email), escapeJson(password), escapeJson(manageToken));
 
                 HttpRequest request = HttpRequest.newBuilder()
-                        .uri(URI.create(config.getHrpAuth().getUrl() + "/admin/force-bind"))
+                        .uri(URI.create(config.getHrpAuth().getUrl() + "/yggdrasil-api/admin/force-bind"))
                         .header("Content-Type", "application/json")
                         .header("Authorization", "Bearer " + serviceToken)
                         .POST(HttpRequest.BodyPublishers.ofString(json))
