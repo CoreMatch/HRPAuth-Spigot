@@ -41,18 +41,23 @@ the plugin:
   (`/admin/claim-user`), body `:69-71`, bearer header `:76`, javadoc `:19-21`.
   `src/main/java/com/hrp/auth/proxy/ForceBindCommand.java:79`
   (`/admin/force-bind`), `manage_token` body `:74-76`, javadoc `:19-22`.
-- Backend has no `/admin` routes: HRPAuth `main.go:174-244` is the full route
-  table with no `/admin` group; grep for `claim-user|force-bind|ClaimUser|
-  ForceBind` across HRPAuth `*.go` returns zero matches; unmatched routes hit
-  NoRoute → 404 `route_not_found` (HRPAuth `main.go:246-256`).
+- Backend has no `/admin` routes: HRPAuth
+  [xref] `/home/lnb/Desktop/HA/HRPAuth/main.go:L174-L244 @ b629c78` is the
+  full route table with no `/admin` group; grep for
+  `claim-user|force-bind|ClaimUser|ForceBind` across HRPAuth `*.go` returns
+  zero matches; unmatched routes hit NoRoute → 404 `route_not_found` (HRPAuth
+  [xref] `/home/lnb/Desktop/HA/HRPAuth/main.go:L246-L256 @ b629c78`).
 - Contract defines the endpoints: HA-Contract
-  `docs/api/openapi/hrpauth-yggdrasil-business.yaml:12` (`/admin/claim-user`)
-  and `:20` (`/admin/force-bind`).
-- Roadmap marks backend as pending: HA-Contract `agents.md:60` (roadmap item
-  2.1, "HA backend handler not yet implemented", status Pending).
+  [xref] `/home/lnb/Desktop/HA/HA-Contract/docs/api/openapi/hrpauth-yggdrasil-business.yaml:L12 @ 65730d4`
+  (`/admin/claim-user`) and
+  [xref] `/home/lnb/Desktop/HA/HA-Contract/docs/api/openapi/hrpauth-yggdrasil-business.yaml:L20 @ 65730d4`
+  (`/admin/force-bind`).
+- Roadmap marks backend as pending: HA-Contract
+  [xref] `/home/lnb/Desktop/HA/HA-Contract/agents.md:L60 @ ace38e1` (roadmap
+  item 2.1, "HA backend handler not yet implemented", status Pending).
 - Register-command payload history: `2d9579d` (add username) → `a434801`
   (remove username) → `f5eeac6` (restore username, add error mapping
-  `RegisterCommand.java:89-99`).
+  `src/main/java/com/hrp/auth/proxy/RegisterCommand.java:89-99`).
 - Not verified: the field-by-field request/response schemas in the OpenAPI spec
   were not exhaustively compared to the plugin's JSON bodies.
 
@@ -62,11 +67,12 @@ Two changes landed after this entry was written:
 
 1. **The backend handlers now exist** — in HRPAuth-Yggdrasil-API (not the
    HRPAuth core): `POST /admin/claim-user` and `POST /admin/force-bind`
-   (repo HRPAuth-Yggdrasil-API @ `61ccc4b`, `main.go:155-156`). HA-Contract
-   roadmap item 2.1 is marked "Implemented (2026-11-05)", and the endpoints
-   are specified in HA-Contract
-   `docs/api/openapi/hrpauth-yggdrasil-business.yaml` (paths
-   `/admin/claim-user` and `/admin/force-bind`; the `:12`/`:20` line
+   (repo HRPAuth-Yggdrasil-API,
+   [xref] `/home/lnb/Desktop/HA/HRPAuth-Yggdrasil-API/main.go:L155-L156 @ 61ccc4b`).
+   HA-Contract roadmap item 2.1 is marked "Implemented (2026-11-05)", and the
+   endpoints are specified in HA-Contract
+   `/home/lnb/Desktop/HA/HA-Contract/docs/api/openapi/hrpauth-yggdrasil-business.yaml`
+   (paths `/admin/claim-user` and `/admin/force-bind`; the `:12`/`:20` line
    citations above are from the pre-implementation revision of that file).
 2. **The plugin routes both calls through the relay prefix**: since commit
    `e8067dd` the call sites are
