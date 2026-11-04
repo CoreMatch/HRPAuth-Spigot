@@ -60,20 +60,14 @@ public class ForceBindCommand implements SimpleCommand {
             return;
         }
 
-        if (config.getHrpAuth().getManageToken().isEmpty()) {
-            source.sendMessage(Component.text("Manage token not configured. Contact an administrator."));
-            return;
-        }
-
         source.sendMessage(Component.text("Force binding account..."));
 
         CompletableFuture.runAsync(() -> {
             try {
                 String serviceToken = oauthClient.getServiceToken();
-                String manageToken = config.getHrpAuth().getManageToken();
                 String json = """
-                        {"username":"%s","email":"%s","password":"%s","manage_token":"%s"}""".formatted(
-                        escapeJson(username), escapeJson(email), escapeJson(password), escapeJson(manageToken));
+                        {"username":"%s","email":"%s","password":"%s"}""".formatted(
+                        escapeJson(username), escapeJson(email), escapeJson(password));
 
                 HttpRequest request = HttpRequest.newBuilder()
                         .uri(URI.create(config.getHrpAuth().getUrl() + "/yggdrasil-api/admin/force-bind"))
@@ -98,8 +92,6 @@ public class ForceBindCommand implements SimpleCommand {
                             "Target account not found. Please check your email and password.";
                         case "invalid_credentials" ->
                             "Invalid email or password for the target account.";
-                        case "invalid_manage_token" ->
-                            "Server configuration error. Contact an administrator.";
                         case "no_mojang_uuid" ->
                             "The proxy-registered account has no Mojang UUID to transfer.";
                         default -> "Force bind failed (" + response.statusCode() + "): " + errorMsg;

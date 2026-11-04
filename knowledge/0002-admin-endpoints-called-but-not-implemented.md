@@ -80,3 +80,13 @@ Two changes landed after this entry was written:
 The "404 route_not_found" consequence above no longer applies against a
 current deployment; `reg`/`forcebind` are functional against the current
 backend.
+
+## Update 2026-11-05 (2) — force-bind Drops `manage_token`
+
+The author retired `manage.token` (2026-11-05): `/admin/force-bind` now
+authenticates with the same OAuth2 service-token tier as `/admin/claim-user`
+(scope `user.force-bind.as-service`). The plugin no longer sends a
+`manage_token` body field and no longer reads `hrpauth.manage-token` from its
+config; the config key and the `invalid_manage_token` error mapping were
+removed in the same change. Any existing plugin `config.yml` may still carry
+the old `manage-token` key — it is ignored on load.
