@@ -50,18 +50,26 @@ grant**, using HRPAuth's built-in super client:
   (`&scope=user.claim.as-service`) and removed in `0394469` ("remove hardcoded
   scope parameter").
 - Super client linkage: plugin config credentials
-  `src/main/java/com/hrp/auth/proxy/config/Config.java:172-173` (comment pointing to
-  core `oauth2.super_client_id/secret`); core super client
-  HRPAuth `services/oauth2_service.go:107`; core grant handling
-  HRPAuth `controllers/oauth2_controller.go:263-264` →
-  `services/oauth2_service.go:305` (`IssueClientCredentialsToken`); auth level
-  for service tokens HRPAuth `controllers/auth_level.go:32`.
+  `src/main/java/com/hrp/auth/proxy/config/Config.java:172-173` (comment
+  pointing to core `oauth2.super_client_id/secret`); core super client
+  HRPAuth `/home/lnb/Desktop/HA/HRPAuth/services/oauth2_service.go::upsertBuiltInSuperClient`;
+  core grant handling HRPAuth
+  `/home/lnb/Desktop/HA/HRPAuth/controllers/oauth2_controller.go::Token` →
+  `/home/lnb/Desktop/HA/HRPAuth/services/oauth2_service.go::IssueClientCredentialsToken`;
+  auth level for service tokens HRPAuth
+  `/home/lnb/Desktop/HA/HRPAuth/controllers/auth_level.go::resolveAuthLevel`.
 - No `/services/*` calls from the plugin: grep `URI.create` yields exactly
-  `OAuthClient.java:46`, `RegisterCommand.java:75`, `ForceBindCommand.java:73`.
-- Dead config: `Config.java:49-59,121-127` (presence section), `getPresence()`
-  `Config.java:29` has no callers.
+  `src/main/java/com/hrp/auth/proxy/OAuthClient.java:46`,
+  `src/main/java/com/hrp/auth/proxy/RegisterCommand.java:75`,
+  `src/main/java/com/hrp/auth/proxy/ForceBindCommand.java:73`.
+- Dead config: `src/main/java/com/hrp/auth/proxy/config/Config.java:49-59,121-127`
+  (presence section), `getPresence()`
+  `src/main/java/com/hrp/auth/proxy/config/Config.java::getPresence` has no
+  callers.
 - Commits: `7d1e08f`, `51ae66b`, `0394469`, `7710fd5` (earlier static
   service-token config).
 - Not verified: the core's exact behavior for an empty scope in
-  `IssueClientCredentialsToken` (`oauth2_service.go:305` onward not fully
-  traced); whether the dead config sections are planned features.
+  `IssueClientCredentialsToken`
+  (`/home/lnb/Desktop/HA/HRPAuth/services/oauth2_service.go::IssueClientCredentialsToken`
+  onward not fully traced); whether the dead config sections are planned
+  features.
