@@ -1,6 +1,7 @@
 # ADR-0002: `/admin/*` Endpoints Called but Not Implemented in the Backend
 
-- **Status**: accepted
+- **Status**: accepted (historical record — the backend gap described below
+  was closed 2026-11-05; see the update at the end)
 - **Date**: 2026-11-04
 
 ## Context
@@ -54,3 +55,28 @@ the plugin:
   `RegisterCommand.java:89-99`).
 - Not verified: the field-by-field request/response schemas in the OpenAPI spec
   were not exhaustively compared to the plugin's JSON bodies.
+
+## Update 2026-11-05 — Backend Gap Closed; Calls Use the Relay Prefix
+
+Two changes landed after this entry was written:
+
+1. **The backend handlers now exist** — in HRPAuth-Yggdrasil-API (not the
+   HRPAuth core): `POST /admin/claim-user` and `POST /admin/force-bind`
+   (repo HRPAuth-Yggdrasil-API @ `61ccc4b`, `main.go:155-156`). HA-Contract
+   roadmap item 2.1 is marked "Implemented (2026-11-05)", and the endpoints
+   are specified in HA-Contract
+   `docs/api/openapi/hrpauth-yggdrasil-business.yaml` (paths
+   `/admin/claim-user` and `/admin/force-bind`; the `:12`/`:20` line
+   citations above are from the pre-implementation revision of that file).
+2. **The plugin routes both calls through the relay prefix**: since commit
+   `e8067dd` the call sites are
+   `POST {url}/yggdrasil-api/admin/claim-user`
+   (`src/main/java/com/hrp/auth/proxy/RegisterCommand.java:75`) and
+   `POST {url}/yggdrasil-api/admin/force-bind`
+   (`src/main/java/com/hrp/auth/proxy/ForceBindCommand.java:79`). The HRPAuth
+   core relay matches the `/yggdrasil-api` prefix, strips it, and forwards
+   the request to HRPAuth-Yggdrasil-API.
+
+The "404 route_not_found" consequence above no longer applies against a
+current deployment; `reg`/`forcebind` are functional against the current
+backend.

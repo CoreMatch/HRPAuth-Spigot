@@ -23,6 +23,11 @@ grant**, using HRPAuth's built-in super client:
 - The plugin does **not** call HRPAuth's `/services/*` inter-service endpoints.
   Its only outbound URLs are `/oauth/token`, `/admin/claim-user`, and
   `/admin/force-bind`.
+  **Update 2026-11-05**: since commit `e8067dd` the two admin URLs carry the
+  `/yggdrasil-api` relay prefix (`{url}/yggdrasil-api/admin/claim-user`,
+  `{url}/yggdrasil-api/admin/force-bind`); the HRPAuth core relay strips the
+  prefix and forwards to HRPAuth-Yggdrasil-API. See entry
+  [0002](0002-admin-endpoints-called-but-not-implemented.md)'s update.
 
 ## Consequences
 
