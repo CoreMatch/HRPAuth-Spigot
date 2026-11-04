@@ -16,8 +16,9 @@ import java.util.concurrent.CompletableFuture;
 /**
  * /ha reg &lt;email&gt; &lt;password&gt;
  *
- * Calls POST /admin/claim-user on the HRPAuth backend to claim the executing
- * player's proxy-registered account (cbh 0→1) with a real email + password.
+ * Calls POST /yggdrasil-api/admin/claim-user (relayed by the HRPAuth core to
+ * HRPAuth-Yggdrasil-API) to claim the executing player's proxy-registered
+ * account (cbh 0→1) with a real email + password.
  * The player's username is auto-detected from the proxy session.
  */
 public class RegisterCommand implements SimpleCommand {
@@ -71,7 +72,7 @@ public class RegisterCommand implements SimpleCommand {
                         escapeJson(username), escapeJson(email), escapeJson(password));
 
                 HttpRequest request = HttpRequest.newBuilder()
-                        .uri(URI.create(config.getHrpAuth().getUrl() + "/admin/claim-user"))
+                        .uri(URI.create(config.getHrpAuth().getUrl() + "/yggdrasil-api/admin/claim-user"))
                         .header("Content-Type", "application/json")
                         .header("Authorization", "Bearer " + serviceToken)
                         .POST(HttpRequest.BodyPublishers.ofString(json))
