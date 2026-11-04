@@ -50,15 +50,15 @@ grant**, using HRPAuth's built-in super client:
   (`&scope=user.claim.as-service`) and removed in `0394469` ("remove hardcoded
   scope parameter").
 - Super client linkage: plugin config credentials
-  `src/main/java/com/hrp/auth/proxy/Config.java:175-176` (comment pointing to
+  `src/main/java/com/hrp/auth/proxy/config/Config.java:172-173` (comment pointing to
   core `oauth2.super_client_id/secret`); core super client
   HRPAuth `services/oauth2_service.go:107`; core grant handling
   HRPAuth `controllers/oauth2_controller.go:263-264` →
   `services/oauth2_service.go:305` (`IssueClientCredentialsToken`); auth level
   for service tokens HRPAuth `controllers/auth_level.go:32`.
 - No `/services/*` calls from the plugin: grep `URI.create` yields exactly
-  `OAuthClient.java:46`, `RegisterCommand.java:74`, `ForceBindCommand.java:79`.
-- Dead config: `Config.java:51-61,122-128` (presence section), `getPresence()`
+  `OAuthClient.java:46`, `RegisterCommand.java:75`, `ForceBindCommand.java:73`.
+- Dead config: `Config.java:49-59,121-127` (presence section), `getPresence()`
   `Config.java:29` has no callers.
 - Commits: `7d1e08f`, `51ae66b`, `0394469`, `7710fd5` (earlier static
   service-token config).
