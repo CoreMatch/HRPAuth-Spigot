@@ -27,9 +27,17 @@ Velocity server's `plugins/` directory and restart the proxy.
 - Optional sections: `presence` (service registration on HRPAuth) and `site`
   (display name/version for the `/ha` command banner).
 
-Commands: `/ha reg <email> <password>` (claim a proxy-registered account) and
-`/ha forcebind <email> <password>` (transfer the Mojang UUID to the target
-account).
+Commands (player-only; both `/ha` and `/hrpauth` are registered aliases):
+
+- `/ha reg <email> <password>` — claim a proxy-registered account
+  (`POST /yggdrasil-api/admin/claim-user`).
+- `/ha forcebind <email> <password>` — transfer the player's Mojang UUID from
+  their proxy-registered account to the target account
+  (`POST /yggdrasil-api/admin/force-bind`).
+
+Both calls authenticate with an OAuth2 service token obtained via the
+`client_credentials` grant (see knowledge 0003); no other credential is
+required since the former `manage_token` was retired.
 
 ## Documentation
 
