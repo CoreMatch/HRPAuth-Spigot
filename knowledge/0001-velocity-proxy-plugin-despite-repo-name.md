@@ -1,7 +1,6 @@
 # ADR-0001: Velocity Proxy Plugin Despite the Repository Name
 
 - **Status**: accepted
-- **Date**: 2026-11-04
 
 ## Context
 
