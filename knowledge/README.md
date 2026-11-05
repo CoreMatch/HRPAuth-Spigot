@@ -21,7 +21,7 @@ contract**, and surface the conflict to the owner.
 
 Each entry is one page in ADR style:
 
-- **Status** (`accepted` / `superseded` / ...), **Date**
+- **Status** (`accepted` / `superseded` / ...)
 - **Context** — the problem and constraints
 - **Decision** — what was chosen
 - **Consequences** — including costs and limitations
@@ -31,8 +31,8 @@ Each entry is one page in ADR style:
 
 ## Entries
 
-| # | Title | Status | Date |
-|---|-------|--------|------|
-| [0001](0001-velocity-proxy-plugin-despite-repo-name.md) | Velocity Proxy Plugin Despite the Repository Name | accepted | 2026-11-04 |
-| [0002](0002-admin-endpoints-relayed-to-yggdrasil-api.md) | `/admin/*` Endpoint Calls Relayed to HRPAuth-Yggdrasil-API | accepted | 2026-11-04 |
-| [0003](0003-service-auth-via-oauth2-client-credentials.md) | Service Auth via OAuth2 client_credentials (Super Client) | accepted | 2026-11-04 |
+| # | Title | Status |
+|---|-------|--------|
+| [0001](0001-velocity-proxy-plugin-despite-repo-name.md) | Velocity Proxy Plugin Despite the Repository Name | accepted |
+| [0002](0002-admin-endpoints-relayed-to-yggdrasil-api.md) | `/admin/*` Endpoint Calls Relayed to HRPAuth-Yggdrasil-API | accepted |
+| [0003](0003-service-auth-via-oauth2-client-credentials.md) | Service Auth via OAuth2 client_credentials (Super Client) | accepted |

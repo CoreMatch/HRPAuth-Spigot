@@ -1,7 +1,6 @@
 # ADR-0002: `/admin/*` Endpoint Calls Relayed to HRPAuth-Yggdrasil-API
 
 - **Status**: accepted
-- **Date**: 2026-11-04
 
 ## Context
 

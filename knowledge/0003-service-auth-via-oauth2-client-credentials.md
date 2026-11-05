@@ -1,7 +1,6 @@
 # ADR-0003: Service Auth via OAuth2 client_credentials (Super Client)
 
 - **Status**: accepted
-- **Date**: 2026-11-04
 
 ## Context
 
