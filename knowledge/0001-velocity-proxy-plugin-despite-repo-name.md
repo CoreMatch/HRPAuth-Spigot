@@ -40,8 +40,5 @@ subcommands `reg` (register/claim) and `forcebind`.
   `/hrpauth` and `/ha`), `:56-65` (dispatch `reg`→RegisterCommand,
   `forcebind`→ForceBindCommand).
 - README self-description: `README.md:3-6` ("Despite the repository name, this
-  is a Velocity plugin … not a Spigot/Bukkit plugin"); introduced by `e8b8ea6`.
-- Commits: `111dcf4` (initialize as Velocity plugin), `7710fd5` (reg command),
-  `d43748d` (forcebind), `0394469` (command handling cleanup).
-- Not verified: none material; a repo-wide `-S"spigot"`/`-S"bukkit"` history
-  search only matched the README commit.
+  is a Velocity plugin … not a Spigot/Bukkit plugin").
+- Not verified: none material.
