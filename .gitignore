@@ -17,3 +17,7 @@ Thumbs.db
 .trae/
 HA-Contract
 HRPAuth-Wiki
+
+# Maven / Eclipse outputs
+target/
+bin/
