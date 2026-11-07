@@ -40,30 +40,30 @@ service-token tier as claim-user.
 ## Evidence
 
 - Plugin call sites (the only two `/admin` references in the plugin):
-  `src/main/java/com/hrp/auth/proxy/RegisterCommand.java:75`
+  `src/main/java/com/hrp/auth/proxy/RegisterCommand.java:L75-L75 ~ .uri(URI.create(config.getHrpAuth().getUrl() + "`
   (`/yggdrasil-api/admin/claim-user`), body `:70-72`, bearer header `:77`,
   javadoc `:19-22`.
-  `src/main/java/com/hrp/auth/proxy/ForceBindCommand.java:73`
+  `src/main/java/com/hrp/auth/proxy/ForceBindCommand.java:L73-L73 ~ .uri(URI.create(config.getHrpAuth().getUrl() + "`
   (`/yggdrasil-api/admin/force-bind`), body `:68-70`, javadoc `:19-22`.
 - Backend handlers: HRPAuth-Yggdrasil-API
-  [xref] `/home/lnb/Desktop/HA/HRPAuth-Yggdrasil-API/main.go:L163-L166`
+  [xref] `/home/lnb/Desktop/HA/HRPAuth-Yggdrasil-API/main.go::main`
   (`/admin` route group),
   [xref] `/home/lnb/Desktop/HA/HRPAuth-Yggdrasil-API/controllers/admin_controller.go::ClaimUser`
   (scope check `user.claim.as-service`,
-  [xref] `/home/lnb/Desktop/HA/HRPAuth-Yggdrasil-API/controllers/admin_controller.go:L67`)
+  [xref] `/home/lnb/Desktop/HA/HRPAuth-Yggdrasil-API/controllers/admin_controller.go::ClaimUser`)
   and
   [xref] `/home/lnb/Desktop/HA/HRPAuth-Yggdrasil-API/controllers/admin_controller.go::ForceBind`
   (scope check `user.force-bind.as-service`,
-  [xref] `/home/lnb/Desktop/HA/HRPAuth-Yggdrasil-API/controllers/admin_controller.go:L159`).
+  [xref] `/home/lnb/Desktop/HA/HRPAuth-Yggdrasil-API/controllers/admin_controller.go::ForceBind`).
 - Core relay prefix handling: HRPAuth
   [xref] `/home/lnb/Desktop/HA/HRPAuth/controllers/relay_controller.go::RelayMiddleware`
   (prefix match, strip, forward).
 - Contract defines the endpoints: HA-Contract
-  [xref] `/home/lnb/Desktop/HA/HA-Contract/docs/api/openapi/hrpauth-yggdrasil-business.yaml:L376`
+  [xref] `/home/lnb/Desktop/HA/HA-Contract/docs/api/openapi/hrpauth-yggdrasil-business.yaml:L376-L376 ~ admin/claim-user:`
   (`/admin/claim-user`) and
-  [xref] `/home/lnb/Desktop/HA/HA-Contract/docs/api/openapi/hrpauth-yggdrasil-business.yaml:L422`
+  [xref] `/home/lnb/Desktop/HA/HA-Contract/docs/api/openapi/hrpauth-yggdrasil-business.yaml:L422-L422 ~ admin/force-bind:`
   (`/admin/force-bind`).
 - Roadmap lists the backend handlers as implemented: HA-Contract
-  [xref] `/home/lnb/Desktop/HA/HA-Contract/agents.md:L60` (roadmap item 2.1).
+  [xref] `/home/lnb/Desktop/HA/HA-Contract/agents.md:L60-L60 ~ | 2.1 | `POST /admin/force-bind`: transfer `moja` (roadmap item 2.1).
 - Not verified: the field-by-field request/response schemas in the OpenAPI
   spec were not exhaustively compared to the plugin's JSON bodies.

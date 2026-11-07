@@ -34,11 +34,11 @@ grant**, using HRPAuth's built-in super client:
 
 ## Evidence
 
-- Token acquisition: `src/main/java/com/hrp/auth/proxy/OAuthClient.java:40-50`
+- Token acquisition: `src/main/java/com/hrp/auth/proxy/OAuthClient.java:L40-L50 ~ private String fetchToken() throws Exception {`
   (POST `/oauth/token`, form body `:41-43`), caching `:33-38`, parsing
   `:58-60`; URL at `:46`.
 - Super client linkage: plugin config credentials
-  `src/main/java/com/hrp/auth/proxy/config/Config.java:172-173` (comment
+  `src/main/java/com/hrp/auth/proxy/config/Config.java:L172-L173 ~ sb.append("# oauth2.super_client_id -> client-id` (comment
   pointing to core `oauth2.super_client_id/secret`); core super client
   HRPAuth `/home/lnb/Desktop/HA/HRPAuth/services/oauth2_service.go::upsertBuiltInSuperClient`;
   core grant handling HRPAuth
@@ -47,9 +47,9 @@ grant**, using HRPAuth's built-in super client:
   auth level for service tokens HRPAuth
   `/home/lnb/Desktop/HA/HRPAuth/controllers/auth_level.go::resolveAuthLevel`.
 - No `/services/*` calls from the plugin: grep `URI.create` yields exactly
-  `src/main/java/com/hrp/auth/proxy/OAuthClient.java:46`,
-  `src/main/java/com/hrp/auth/proxy/RegisterCommand.java:75`,
-  `src/main/java/com/hrp/auth/proxy/ForceBindCommand.java:73`.
+  `src/main/java/com/hrp/auth/proxy/OAuthClient.java:L46-L46 ~ .uri(URI.create(hrpAuth.getUrl() + "/oauth/token`,
+  `src/main/java/com/hrp/auth/proxy/RegisterCommand.java:L75-L75 ~ .uri(URI.create(config.getHrpAuth().getUrl() + "`,
+  `src/main/java/com/hrp/auth/proxy/ForceBindCommand.java:L73-L73 ~ .uri(URI.create(config.getHrpAuth().getUrl() + "`.
 - Not verified: the core's exact behavior for an empty scope in
   `IssueClientCredentialsToken`
   (`/home/lnb/Desktop/HA/HRPAuth/services/oauth2_service.go::IssueClientCredentialsToken`
