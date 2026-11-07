@@ -40,10 +40,10 @@ service-token tier as claim-user.
 ## Evidence
 
 - Plugin call sites (the only two `/admin` references in the plugin):
-  `src/main/java/com/hrp/auth/proxy/RegisterCommand.java:L75-L75 ~ .uri(URI.create(config.getHrpAuth().getUrl() + "`
+  `src/main/java/com/hrp/auth/proxy/RegisterCommand.java:L75-L75 fp=498932a4 ~ .uri(URI.create(config.getHrpAuth().getUrl() + "`
   (`/yggdrasil-api/admin/claim-user`), body `:70-72`, bearer header `:77`,
   javadoc `:19-22`.
-  `src/main/java/com/hrp/auth/proxy/ForceBindCommand.java:L73-L73 ~ .uri(URI.create(config.getHrpAuth().getUrl() + "`
+  `src/main/java/com/hrp/auth/proxy/ForceBindCommand.java:L73-L73 fp=b4828da6 ~ .uri(URI.create(config.getHrpAuth().getUrl() + "`
   (`/yggdrasil-api/admin/force-bind`), body `:68-70`, javadoc `:19-22`.
 - Backend handlers: HRPAuth-Yggdrasil-API
   [xref] `/home/lnb/Desktop/HA/HRPAuth-Yggdrasil-API/main.go::main`
