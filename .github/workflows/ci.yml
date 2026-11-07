@@ -1,0 +1,26 @@
+# Minimal Java CI: build the plugin with Gradle on every push/PR.
+name: Java CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v7
+
+    - name: Set up JDK
+      uses: actions/setup-java@v7
+      with:
+        distribution: temurin
+        java-version: 25
+
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v5
+
+    - name: Build with Gradle
+      run: ./gradlew build --no-daemon
