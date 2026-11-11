@@ -40,17 +40,17 @@ grant**, using HRPAuth's built-in super client:
 - Super client linkage: plugin config credentials
   `src/main/java/com/hrp/auth/proxy/config/Config.java:L172-L173 fp=72f442da ~ sb.append("# oauth2.super_client_id -> client-id` (comment
   pointing to core `oauth2.super_client_id/secret`); core super client
-  HRPAuth `/home/lnb/Desktop/HA/HRPAuth/services/oauth2_service.go::upsertBuiltInSuperClient`;
+  HRPAuth `/home/lnb/Desktop/HA/hrpauth/HRPAuth/services/oauth2_service.go::upsertBuiltInSuperClient`;
   core grant handling HRPAuth
-  `/home/lnb/Desktop/HA/HRPAuth/controllers/oauth2_controller.go::Token` →
-  `/home/lnb/Desktop/HA/HRPAuth/services/oauth2_service.go::IssueClientCredentialsToken`;
+  `/home/lnb/Desktop/HA/hrpauth/HRPAuth/controllers/oauth2_controller.go::Token` →
+  `/home/lnb/Desktop/HA/hrpauth/HRPAuth/services/oauth2_service.go::IssueClientCredentialsToken`;
   auth level for service tokens HRPAuth
-  `/home/lnb/Desktop/HA/HRPAuth/controllers/auth_level.go::resolveAuthLevel`.
+  `/home/lnb/Desktop/HA/hrpauth/HRPAuth/controllers/auth_level.go::resolveAuthLevel`.
 - No `/services/*` calls from the plugin: grep `URI.create` yields exactly
   `src/main/java/com/hrp/auth/proxy/OAuthClient.java:L46-L46 fp=565dfd28 ~ .uri(URI.create(hrpAuth.getUrl() + "/oauth/token`,
   `src/main/java/com/hrp/auth/proxy/RegisterCommand.java:L75-L75 fp=498932a4 ~ .uri(URI.create(config.getHrpAuth().getUrl() + "`,
   `src/main/java/com/hrp/auth/proxy/ForceBindCommand.java:L73-L73 fp=b4828da6 ~ .uri(URI.create(config.getHrpAuth().getUrl() + "`.
 - Not verified: the core's exact behavior for an empty scope in
   `IssueClientCredentialsToken`
-  (`/home/lnb/Desktop/HA/HRPAuth/services/oauth2_service.go::IssueClientCredentialsToken`
+  (`/home/lnb/Desktop/HA/hrpauth/HRPAuth/services/oauth2_service.go::IssueClientCredentialsToken`
   onward not fully traced).
