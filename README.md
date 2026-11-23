@@ -1,48 +1,30 @@
-# HRPAuth-Spigot
+<div align="center">
+  <h1>HRPAuth-Spigot</h1>
+  <p><strong>Claim a player identity without losing its Mojang history.</strong></p>
+  <p><a href="./README.zh-CN.md">简体中文</a></p>
+</div>
 
-Velocity proxy plugin that connects an HRPAuth deployment to Minecraft players:
-registers/claims game accounts against HRPAuth and exposes admin commands on the
-proxy. Despite the repository name, this is a **Velocity** plugin
-(`velocity-plugin.json`, plugin id `hrpauth-proxy`), not a Spigot/Bukkit plugin.
+The canonical repository is [CoreMatch/HRPAuth-Velocity](https://github.com/CoreMatch/HRPAuth-Velocity): a Velocity proxy plugin that connects in-game identities to HRPAuth accounts.
 
-## Build & Run
+It supports account claiming and binding, plus transfer of an existing Mojang UUID to the claimed account.
 
-Requires Java 25.
+## Why HRPAuth-Spigot
 
-```bash
-./build.sh   # runs ./gradlew build
-```
+- **Keep Minecraft identity intact.** Preserve a player's Mojang UUID when moving to an HA account.
+- **Claim or bind in game.** Connect a proxy-registered identity to a platform account.
+- **Use familiar aliases.** Reach player actions through the plugin's two registered command aliases.
+- **Authorize as a service.** Let the plugin call HRPAuth with OAuth2 service credentials.
 
-Output: `build/libs/HRPAuth-Proxy-1.3.0.jar`. Drop the jar into your
-Velocity server's `plugins/` directory and restart the proxy.
+## Learn more
 
-## Dependencies & Configuration
+- [Canonical Velocity repository](https://github.com/CoreMatch/HRPAuth-Velocity) — maintained source
+- [HA Wiki](https://wiki.mcnb.dev/) — ecosystem documentation
+- [HA-Contract](https://github.com/CoreMatch/HA-Contract) — ecosystem API contracts
 
-- Upstream dependency: an HRPAuth core instance (OAuth2 + business API).
-- On first startup the plugin generates
-  `plugins/hrpauth-proxy/config.yml` with defaults. You must fill in
-  `hrpauth.client-id` / `hrpauth.client-secret` (from HRPAuth's
-  `oauth2.super_client_id` / `oauth2.super_client_secret`, or a dedicated
-  `client_credentials` client) and `hrpauth.url`, then restart.
-- Optional sections: `presence` (service registration on HRPAuth) and `site`
-  (display name/version for the `/ha` command banner).
+## Scope
 
-Commands (player-only; both `/ha` and `/hrpauth` are registered aliases):
+Despite its folder name, this is not a Spigot/Bukkit plugin; its commands are player-only.
 
-- `/ha reg <email> <password>` — claim a proxy-registered account
-  (`POST /yggdrasil-api/admin/claim-user`).
-- `/ha forcebind <email> <password>` — transfer the player's Mojang UUID from
-  their proxy-registered account to the target account
-  (`POST /yggdrasil-api/admin/force-bind`).
+## License & provenance
 
-Both calls authenticate with an OAuth2 service token obtained via the
-`client_credentials` grant (see knowledge 0003); no other credential is
-required since the former `manage_token` was retired.
-
-## Documentation
-
-- HRPAuth contracts and error codes: [HA-Contract](https://github.com/CoreMatch/HA-Contract)
-  (see `docs/api/openapi/hrpauth-business.yaml` and
-  `docs/api/openapi/hrpauth-yggdrasil-business.yaml` — the latter specifies
-  the `/admin/claim-user` and `/admin/force-bind` endpoints this plugin calls)
-- Force-bind background (roadmap item 2.1): [HA-Contract — agents.md](https://github.com/CoreMatch/HA-Contract/blob/main/agents.md)
+[AGPL-3.0](LICENSE). Source: [CoreMatch/HRPAuth-Velocity](https://github.com/CoreMatch/HRPAuth-Velocity).
