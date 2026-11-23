@@ -60,7 +60,7 @@ public class Config {
 
     public static class SiteConfig {
         private String name = "HRPAuth-Proxy";
-        private String version = "1.0.0";
+        private String version = "1.3.0";
 
         public String getName() { return name; }
         public String getVersion() { return version; }
@@ -213,7 +213,7 @@ public class Config {
         // site
         Map<String, Object> site = new LinkedHashMap<>();
         site.put("name", "HRPAuth-Proxy");
-        site.put("version", "1.0.0");
+        site.put("version", "1.3.0");
         root.put("site", site);
 
         // log

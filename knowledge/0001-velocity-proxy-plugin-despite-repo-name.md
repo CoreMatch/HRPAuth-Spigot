@@ -32,7 +32,7 @@ subcommands `reg` (register/claim) and `forcebind`.
   ("HRPAuth Velocity Proxy Plugin", main class
   `com.hrp.auth.proxy.HrpAuthProxy`).
 - Plugin annotation and Velocity imports:
-  `src/main/java/com/hrp/auth/proxy/HrpAuthProxy.java:L17-L17 fp=3ddec6c7 ~ @Plugin(id = "hrpauth-proxy", name = "HRPAuth-Pr`
+  `src/main/java/com/hrp/auth/proxy/HrpAuthProxy.java:L17-L17 fp=5143a1e6 ~ @Plugin(id = "hrpauth-proxy", name = "HRPAuth-Pr`
   (`@Plugin(id = "hrpauth-proxy", name = "HRPAuth-Proxy")`).
 - Command registration and dispatch:
   `src/main/java/com/hrp/auth/proxy/HrpAuthProxy.java:L78-L86 fp=eab0ae06 ~ CommandMeta hrpauthMeta = commandManager.metaBui` (register

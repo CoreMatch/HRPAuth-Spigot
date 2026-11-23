@@ -14,7 +14,7 @@ import org.slf4j.Logger;
 import jakarta.inject.Inject;
 import java.nio.file.Path;
 
-@Plugin(id = "hrpauth-proxy", name = "HRPAuth-Proxy", version = "1.0.0")
+@Plugin(id = "hrpauth-proxy", name = "HRPAuth-Proxy", version = "1.3.0")
 public class HrpAuthProxy {
 
     private final ProxyServer server;

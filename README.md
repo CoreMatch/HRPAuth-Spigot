@@ -13,7 +13,7 @@ Requires Java 25.
 ./build.sh   # runs ./gradlew build
 ```
 
-Output: `build/libs/HRPAuth-Proxy-1.0-SNAPSHOT.jar`. Drop the jar into your
+Output: `build/libs/HRPAuth-Proxy-1.3.0.jar`. Drop the jar into your
 Velocity server's `plugins/` directory and restart the proxy.
 
 ## Dependencies & Configuration

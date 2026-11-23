@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "com.hrp.auth"
-version = "1.0-SNAPSHOT"
+version = "1.3.0"
 
 repositories {
     maven("https://repo.papermc.io/repository/maven-public/")
