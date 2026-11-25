@@ -14,10 +14,10 @@ import java.time.Duration;
 import java.util.concurrent.CompletableFuture;
 
 /**
- * /ha forcebind &lt;email&gt; &lt;password&gt;
+ * /armorial forcebind &lt;email&gt; &lt;password&gt; (aliases: /hrpauth, /ha)
  *
- * Calls POST /yggdrasil-api/admin/force-bind (relayed by the HRPAuth core to
- * HRPAuth-Yggdrasil-API) to transfer the executing player's Mojang UUID from
+ * Calls POST /yggdrasil-api/admin/force-bind (relayed by the Armorial core to
+ * Armorial Yggdrasil API) to transfer the executing player's Mojang UUID from
  * their proxy-registered account (cbh=0) to a manually registered account
  * identified by email + password, then deletes the proxy-registered account.
  */
@@ -47,7 +47,7 @@ public class ForceBindCommand implements SimpleCommand {
         }
 
         if (args.length < 2) {
-            source.sendMessage(Component.text("Usage: /ha forcebind <email> <password>"));
+            source.sendMessage(Component.text("Usage: /armorial forcebind <email> <password> (aliases: /hrpauth, /ha)"));
             return;
         }
 

@@ -1,8 +1,8 @@
 {
   "id": "hrpauth-proxy",
-  "name": "HRPAuth-Proxy",
+  "name": "Armorial Velocity Proxy",
   "version": "${version}",
-  "description": "HRPAuth Velocity Proxy Plugin",
+  "description": "Armorial Velocity Proxy Plugin",
   "authors": ["HRP"],
   "main": "com.hrp.auth.proxy.HrpAuthProxy",
   "dependencies": []

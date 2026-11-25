@@ -14,10 +14,10 @@ import java.time.Duration;
 import java.util.concurrent.CompletableFuture;
 
 /**
- * /ha reg &lt;email&gt; &lt;password&gt;
+ * /armorial reg &lt;email&gt; &lt;password&gt; (aliases: /hrpauth, /ha)
  *
- * Calls POST /yggdrasil-api/admin/claim-user (relayed by the HRPAuth core to
- * HRPAuth-Yggdrasil-API) to claim the executing player's proxy-registered
+ * Calls POST /yggdrasil-api/admin/claim-user (relayed by the Armorial core to
+ * Armorial Yggdrasil API) to claim the executing player's proxy-registered
  * account (cbh 0→1) with a real email + password.
  * The player's username is auto-detected from the proxy session.
  */
@@ -48,7 +48,7 @@ public class RegisterCommand implements SimpleCommand {
         }
 
         if (args.length < 2) {
-            source.sendMessage(Component.text("Usage: /ha reg <email> <password>"));
+            source.sendMessage(Component.text("Usage: /armorial reg <email> <password> (aliases: /hrpauth, /ha)"));
             return;
         }
 

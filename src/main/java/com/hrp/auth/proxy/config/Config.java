@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * Plugin configuration loaded from config.yml in the plugin data directory.
  * On first startup the file is auto-generated with safe defaults; operators
- * must edit the credentials before the plugin can talk to HRPAuth.
+ * must edit the credentials before the plugin can talk to Armorial.
  */
 public class Config {
 
@@ -59,7 +59,7 @@ public class Config {
     }
 
     public static class SiteConfig {
-        private String name = "HRPAuth-Proxy";
+        private String name = "Armorial Velocity Proxy";
         private String version = "1.3.0";
 
         public String getName() { return name; }
@@ -163,12 +163,12 @@ public class Config {
      */
     private static String buildDefaultYaml() {
         StringBuilder sb = new StringBuilder();
-        sb.append("# ─── HRPAuth-Proxy Configuration ────────────────────────\n");
+        sb.append("# ─── Armorial Velocity Proxy Configuration ───────────────\n");
         sb.append("# Auto-generated on first startup. Edit and restart the proxy.\n");
         sb.append("#\n");
         sb.append("# !! IMPORTANT: You MUST fill in hrpauth.client-id and\n");
-        sb.append("#    hrpauth.client-secret before the plugin can talk to HRPAuth.\n");
-        sb.append("#    These values come from your HRPAuth config.yaml:\n");
+        sb.append("#    hrpauth.client-secret before the plugin can talk to Armorial.\n");
+        sb.append("#    These values come from your Armorial config.yaml:\n");
         sb.append("#      oauth2.super_client_id      -> client-id\n");
         sb.append("#      oauth2.super_client_secret   -> client-secret\n");
         sb.append("#\n");
@@ -212,7 +212,7 @@ public class Config {
 
         // site
         Map<String, Object> site = new LinkedHashMap<>();
-        site.put("name", "HRPAuth-Proxy");
+        site.put("name", "Armorial Velocity Proxy");
         site.put("version", "1.3.0");
         root.put("site", site);
 

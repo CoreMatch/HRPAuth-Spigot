@@ -14,7 +14,7 @@ import org.slf4j.Logger;
 import jakarta.inject.Inject;
 import java.nio.file.Path;
 
-@Plugin(id = "hrpauth-proxy", name = "HRPAuth-Proxy", version = "1.3.0")
+@Plugin(id = "hrpauth-proxy", name = "Armorial Velocity Proxy", version = "1.3.0")
 public class HrpAuthProxy {
 
     private final ProxyServer server;
@@ -43,7 +43,7 @@ public class HrpAuthProxy {
         // Validate critical credentials
         if (config.getHrpAuth().getClientId().isEmpty()
                 || config.getHrpAuth().getClientSecret().isEmpty()) {
-            logger.warn("HRPAuth client-id / client-secret is empty! "
+            logger.warn("Armorial client-id / client-secret is empty! "
                     + "Please edit plugins/hrpauth-proxy/config.yml and restart.");
         }
 
@@ -66,14 +66,20 @@ public class HrpAuthProxy {
             } else {
                 invocation.source().sendMessage(
                         net.kyori.adventure.text.Component.text(
-                                "HA > " + config.getSite().getName() + " v" + config.getSite().getVersion() + "\n"
+                                "Armorial > " + config.getSite().getName() + " v" + config.getSite().getVersion() + "\n"
                                 + "Usage:\n"
-                                + "  /ha reg <email> <password>        - Claim a proxy-registered account\n"
-                                + "  /ha forcebind <email> <password>  - Transfer Mojang UUID to target account"
+                                + "  /armorial reg <email> <password>        - Claim a proxy-registered account\n"
+                                + "  /armorial forcebind <email> <password>  - Transfer Mojang UUID to target account\n"
+                                + "Aliases: /hrpauth, /ha"
                         )
                 );
             }
         };
+
+        CommandMeta armorialMeta = commandManager.metaBuilder("armorial")
+                .plugin(this)
+                .build();
+        commandManager.register(armorialMeta, hrpauthCmd);
 
         CommandMeta hrpauthMeta = commandManager.metaBuilder("hrpauth")
                 .plugin(this)
@@ -85,7 +91,7 @@ public class HrpAuthProxy {
                 .build();
         commandManager.register(haMeta, hrpauthCmd);
 
-        logger.info("HRPAuth-Proxy has been loaded! (site={})", config.getSite().getName());
+        logger.info("Armorial Velocity Proxy has been loaded! (site={})", config.getSite().getName());
     }
 
     public Config getConfig() {

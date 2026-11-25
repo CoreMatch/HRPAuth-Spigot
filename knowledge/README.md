@@ -10,9 +10,9 @@ is not meant to make external projects accommodate this one.
 ## Order of Authority
 
 This knowledge base **does not define outward behavior**. Where the behavior of
-this plugin touches the HA ecosystem's external contracts (notably the
+this plugin touches the Armorial ecosystem's external contracts (notably the
 `/admin/*` endpoints it calls), the authoritative definitions live in
-[HA-Contract](https://github.com/CoreMatch/HA-Contract) (OpenAPI specs under
+[Armorial Contract](https://github.com/CoreMatch/HA-Contract) (OpenAPI specs under
 `docs/api/openapi/`). If an entry here ever appears to contradict a contract,
 **the contract wins and the entry is stale — fix the entry, never the
 contract**, and surface the conflict to the owner.
